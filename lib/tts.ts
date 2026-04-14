@@ -1,14 +1,22 @@
-export const playAudio = (text: string) => {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+export const playAudio = (text: string, onEnd?: () => void) => {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+    if (onEnd) onEnd();
+    return;
+  }
 
-  // 4. Cancel Previous Speech
+  // Cancel Previous Speech
   window.speechSynthesis.cancel();
 
-  // 5. Improve Pronunciation
+  // Improve Pronunciation
   const processedText = text.replace(/\./g, ". ");
   const utterance = new SpeechSynthesisUtterance(processedText);
 
-  // 2. Improve Voice Settings
+  if (onEnd) {
+    utterance.onend = onEnd;
+    utterance.onerror = onEnd;
+  }
+
+  // Improve Voice Settings
   utterance.rate = 0.9;
   utterance.pitch = 1;
   utterance.volume = 1;
@@ -16,7 +24,7 @@ export const playAudio = (text: string) => {
   const applyVoiceAndSpeak = () => {
     const voices = window.speechSynthesis.getVoices();
     
-    // 1. Select a Better Voice
+    // Select a Better Voice
     let selectedVoice = voices.find(v =>
       v.name.includes("Google US English") ||
       v.name.includes("Google UK English Female") ||
@@ -28,7 +36,7 @@ export const playAudio = (text: string) => {
       selectedVoice = voices.find(v => v.name.includes("Google") || v.name.includes("Microsoft"));
     }
 
-    // 6. Fallback Strategy
+    // Fallback Strategy
     if (!selectedVoice) {
       selectedVoice = voices.find(v => v.lang.startsWith('en'));
     }
@@ -40,10 +48,28 @@ export const playAudio = (text: string) => {
     window.speechSynthesis.speak(utterance);
   };
 
-  // 3. Ensure Voices Are Loaded
+  // Ensure Voices Are Loaded
   if (window.speechSynthesis.getVoices().length === 0) {
     window.speechSynthesis.addEventListener('voiceschanged', applyVoiceAndSpeak, { once: true });
   } else {
     applyVoiceAndSpeak();
+  }
+};
+
+export const pauseAudio = () => {
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.pause();
+  }
+};
+
+export const resumeAudio = () => {
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.resume();
+  }
+};
+
+export const stopAudio = () => {
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
   }
 };

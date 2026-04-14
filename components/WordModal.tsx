@@ -35,7 +35,7 @@ export default function WordModal({ wordId, onClose }: WordModalProps) {
         aria-modal="true"
       >
         {/* Top decorative line (like a dictionary card) */}
-        <div className="h-2 w-full bg-[#8b5a2b]"></div>
+        <div className="h-2 w-full bg-[#2c3e50]"></div>
         
         <div className="p-6 space-y-4">
           <div className="flex items-start justify-between">
@@ -44,7 +44,7 @@ export default function WordModal({ wordId, onClose }: WordModalProps) {
                 {wordData.word}
                 <button 
                   onClick={() => playAudio(wordData.word)}
-                  className="p-1.5 text-[#8b5a2b] hover:bg-[#8b5a2b]/10 rounded-full transition-colors"
+                  className="p-1.5 text-[#2c3e50] hover:bg-[#2c3e50]/10 rounded-full transition-colors"
                   aria-label="Listen to pronunciation"
                 >
                   <Volume2 className="w-4 h-4" />
@@ -68,7 +68,7 @@ export default function WordModal({ wordId, onClose }: WordModalProps) {
             <p className="text-lg text-gray-800 font-serif leading-relaxed">{wordData.definition}</p>
           </div>
           
-          <div className="bg-[#f4f1ea] p-3 rounded border-l-4 border-[#8b5a2b]">
+          <div className="bg-[#f4f1ea] p-3 rounded border-l-4 border-[#2c3e50]">
             <p className="text-gray-700 italic font-serif">&quot;{wordData.example}&quot;</p>
           </div>
         </div>

@@ -35,15 +35,15 @@ export default function GlossaryModal({ isOpen, onClose, onWordClick }: Glossary
         role="dialog"
         aria-modal="true"
       >
-        <div className="h-2 w-full bg-[#8b5a2b]"></div>
+        <div className="h-2 w-full bg-[#2c3e50]"></div>
         <div className="flex items-center justify-between p-6 border-b border-[#e2d9c8] bg-[#f4f1ea]">
-          <h2 className="text-2xl font-bold text-[#5c3a21] font-serif flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-[#2c3e50] font-serif flex items-center gap-3">
             <BookA className="w-6 h-6" />
             Glossary
           </h2>
           <button 
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-[#8b5a2b] transition-colors"
+            className="p-2 text-gray-400 hover:text-[#2c3e50] transition-colors"
           >
             <X className="w-6 h-6" />
           </button>
@@ -54,14 +54,14 @@ export default function GlossaryModal({ isOpen, onClose, onWordClick }: Glossary
             {words.map((wordData) => (
               <div 
                 key={wordData.id} 
-                className="bg-white p-4 rounded-sm shadow-sm border border-[#e2d9c8] hover:border-[#8b5a2b] hover:shadow-md transition-all cursor-pointer group"
+                className="bg-white p-4 rounded-sm shadow-sm border border-[#e2d9c8] hover:border-[#2c3e50] hover:shadow-md transition-all cursor-pointer group"
                 onClick={() => {
                   onClose();
                   onWordClick(wordData.id);
                 }}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-bold text-gray-900 font-serif capitalize group-hover:text-[#8b5a2b] transition-colors">
+                  <h3 className="text-lg font-bold text-gray-900 font-serif capitalize group-hover:text-[#2c3e50] transition-colors">
                     {wordData.word}
                   </h3>
                   <button 
@@ -69,7 +69,7 @@ export default function GlossaryModal({ isOpen, onClose, onWordClick }: Glossary
                       e.stopPropagation();
                       playAudio(wordData.word);
                     }}
-                    className="p-1.5 text-gray-400 hover:text-[#8b5a2b] hover:bg-[#f4f1ea] rounded-full transition-colors"
+                    className="p-1.5 text-gray-400 hover:text-[#2c3e50] hover:bg-[#f4f1ea] rounded-full transition-colors"
                     aria-label={`Listen to ${wordData.word}`}
                   >
                     <Volume2 className="w-4 h-4" />
